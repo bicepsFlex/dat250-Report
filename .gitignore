@@ -1,0 +1,7 @@
+#*.pdf // remove comment once you have cloned the repository
+*.log
+*.blg
+*.bbl
+*.aux
+*~
+desktop.ini
