@@ -1,4 +1,50 @@
+% This section should provide details of how the prototype has been implemented which may involve presentation of suitable code snippets.
 \section{Prototype Implementation}
 \label{sec:implementation}
+In this section we'll describe how the different software technologies were implemented and how they were used in our project, by briefly mentioning what they do and how we thought by implementing them. Code snippets are also showed to explain and visualize how the code looks in our real-time project.
 
-This section should provide details of how the prototype has been implemented which may involve presentation of suitable code snippets.
+\subsection{JPA}\label{sub:jpa}
+Prototype implementation had few major steps. First and most crucial one, was to create JPA entities and let them communicate with each other, from given relations between them.
+
+Two entities were created, \textbf{POLL} and \textbf{USER} with appropriate relations stored in Derby H2 relational database. Relations between those entities are One-To-Many, since one user can create many polls, but only one user can be the creator/owner of a specific poll. Furthermore, there is a possibility to vote on a specific poll, thus there is a need for storing data about that too. This is handled with a "Many-To-Many" relation between Poll and User entities, creating a new table with two attributes \textbf{User.uID} and \textbf{Poll.pollID} storing "who voted on what".
+
+As shown in the example below, JPA makes it very easy to create new entities. Just by adding annotation \textit{@Entity}, the Java class is then declared to behave as an entity when program runs. In the same way we can use \textit{@Id, @ManyToOne, @ManyToMany, ...} annotations to configure the desired relations and identities for different entity attributes.
+
+\lstinputlisting[language=java]{code/pollentity.java}
+
+JPA doesn't give basic; create, read, update and delete (CRUD) operations, when new entities are created. Therefore, it was necessary to create own Data Access Object (DAO), for every entity created. This is very cumbersome and time consuming. Benefits of using Spring Framework, is that CRUD operation can very simply be added for entities by extending a Spring Framework Class (CrudRepository or PagingAndSortingRepository which extends CrudRepository), we chose PagingAndSortingRepository, as it has the same functionalities as the other class, but with some extra functions which make it simpler to "page and sort" the results obtained.  
+
+In the code snippet below, we can see our implementation of User repository extending the spring framework class. With an extra functionality, \textit{findByFname}, which is a read operation to search for a user by his/her first name.
+
+\lstinputlisting[language=java]{code/userrepo.java}
+
+\subsection{REST}\label{sub:rest}
+With the entities set up and ready to be used, a user needs some way to interact with this data. To accomplish this, a REST API needs to be implemented. To implement a business logic side, Spring Framework was used again. With the benefits of using Java annotations \textit{@Controller}, the Java class is then declared to behave as a RestController when program runs. Creating new methods within this Class and annotating them with desired mapping annotation, all CRUD operations can be accessed from HTTP requests.
+
+\lstinputlisting[language=java]{code/pollrest.java}
+
+As we can see in the code snippet above, it is very simple to use Spring frameworks annotation to also make a REST controller. The \textit{@Controller} annotation, makes this class a controller when the program runs. To use different repositories to use in this controller class, we need some way to access them, this is accomplished with the annotation \textit{@Autowired}, which wires the repository to the controller when the program launches.
+
+In a controller class we can use different request mappings, such as \textit{@GetMapping} and \textit{@PostMapping}, which we used in our code. In the different request mappings, we need to define the path at which to access the different methods. In the code snippet there are two examples of such mappings, one POST mapping, which at the path \textit{/pollAdd}, needs parameters defined with \textit{@RequestParam} to execute the \textit{pollAdd()} method. And a second, GET mapping to search polls at the path \textit{/polls} with defined parameters.
+
+While implementing REST API to our prototype; post, get, put, delete mapping was used to make user interact with prototype's business logic. Since this requires the user to send HTTP-request with different mappings for different operations. Later, this was modified and downgraded to only GET and POST mappings, since those are the only two HTTP requests a HTML form supports.
+
+\subsection{Security}\label{sub:security}
+Since a user must register and login to use most parts of the web page, there needed to be some security implemented. For this we used Spring frameworks Security dependency, which allowed us to simply define which pages could, and which couldn't be accessed without logging in, this can be seen in the code snippet below.
+
+For a “simpler” and more secure login process, we decided to use Google's OAuth 2. By doing this, we don't need to store sensitive user information, and user doesn't need to create a new password for him/her to remember. As the best security is the security you don't need to implement yourself, which can cause unintended errors or follow with security holes.
+
+\lstinputlisting[language=java]{code/security.java}
+
+{\footnotesize\textbf{Disclaimer!}\textit{ All documentations and tutorials we looked at about Spring Framework were taken from \cite{spring_Framework}}}
+
+% \subsection{Firebase}\label{sub:firebase}
+% TODO
+
+\subsection{Messaging system}\label{sub:messaging}
+In the web application, a user can subscribe to a poll and receive its results when the poll closes. This calls for a messaging system implantation. For this we used RabbitMQ\cite{rabbitmq} with a receiver and a sender class, again using Java annotations to declare a method to be a RabbitListener. We chose to use a topic-based messaging queue, as it made it easy to use poll status (present, past, future) as the topic keys.
+
+But before a user can receive messages from a subscription, the user must subscribe to a specific poll, which is then saved in a subscription list that the user has saved in its entity. From these lists, rabbit listener finds correct receivers and sends the requested message to them. 
+
+\subsection{Front end}\label{sub:frontend}
+User interacts with the program via web browser and gets information from database by communicating with business logic via Spring MVC, using Thymeleaf \cite{thymleaf}. Thymeleaf is an integrated method to use in HTML code in order to access data from models, generated based on the request sent by user. HTML code was used to create different use case screens and according to what requests can be made, the appropriate thymeleaf code was inserted into HTML code. For the pages to look "better" and be user friendly with what can be done on a web page, CSS was used to decorate the pages and how they look/show up for the client.

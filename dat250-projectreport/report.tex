@@ -7,15 +7,21 @@
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{tikz}
-\usepackage{tkz-graph}
-\usetikzlibrary{shapes.misc, positioning}
+% \usepackage{tikz}
+% \usepackage{tkz-graph}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    linktoc=all
+}
+\usepackage{caption}
+% \usetikzlibrary{shapes.misc, positioning}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+% \setlength{\parskip}{0.5em}
 
 \lstset{frame=tb,
   language=Java,
@@ -34,19 +40,19 @@
   tabsize=3
 }
 \begin{document}
+\pagenumbering{gobble}
 
 \title{DAT 250\\Advanced Software Technologies}
 
-\author{Wojciech Pasiak\\Jaroslaw Pasiak\\Christoffer Brandhaug\\Erlend Meling Torsvik}
+\author{Wojciech Pasiak\\Jaroslaw Pasiak\\Cristoffer Brandhaug\\Erlend Meling Torsvik}
 
 \maketitle
-
-\rule{\textwidth}{1.6pt}\vspace*{\baselineskip}\vspace{2pt}
+\noindent\rule{\textwidth}{1.6pt}\vspace*{\baselineskip}\vspace{2pt}
 \vspace{0.75\baselineskip}
 {\huge \centering
 Feed App Project\\}
 \vspace{0.75\baselineskip}
-\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace{2pt}
+\noindent\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace{2pt}
 \vspace{9pc}
 \begin{figure}[H]
   \centering
@@ -54,6 +60,7 @@ Feed App Project\\}
   \label{fig:logo}
 \end{figure}
 \newpage
+\pagenumbering{arabic}
 \tableofcontents
 \newpage
 
@@ -63,22 +70,23 @@ Feed App Project\\}
   project that has been undertaken.
 
 \end{abstract}
+\newpage
 
-%\input{commands}
+% \input{commands}
 
-\input{sections/introduction}
+% \input{sections/introduction}
 
-\input{sections/technology}
+% \input{sections/technology}
 
 \input{sections/design}
 
 \input{sections/implementation}
 
-\input{sections/evaluation}
+% \input{sections/evaluation}
 
-\input{sections/conclusion}
+% \input{sections/conclusion}
 
-\bibliographystyle{plain}
+\bibliographystyle{IEEEtran}
 \bibliography{report}
 
 \end{document}
