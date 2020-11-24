@@ -38,13 +38,13 @@ For a “simpler” and more secure login process, we decided to use Google's OA
 
 {\footnotesize\textbf{Disclaimer!}\textit{ All documentations and tutorials we looked at about Spring Framework were taken from \cite{spring_Framework}}}
 
-% \subsection{Firebase}\label{sub:firebase}
-% TODO
+\subsection{Firebase}\label{sub:firebase}
+\textbf{\textit{TODO}}
 
-\subsection{Messaging system}\label{sub:messaging}
-In the web application, a user can subscribe to a poll and receive its results when the poll closes. This calls for a messaging system implantation. For this we used RabbitMQ\cite{rabbitmq} with a receiver and a sender class, again using Java annotations to declare a method to be a RabbitListener. We chose to use a topic-based messaging queue, as it made it easy to use poll status (present, past, future) as the topic keys.
+\subsection{Messaging System}\label{sub:messaging}
+In the web application, a user can subscribe to a poll and receive its results when the poll closes. This calls for a messaging system implantation. For this we used RabbitMQ with a receiver and a sender class, again using Java annotations to declare a method to be a RabbitListener. We chose to use a topic-based messaging queue, as it made it easy to use poll status (present, past, future) as the topic keys.
 
 But before a user can receive messages from a subscription, the user must subscribe to a specific poll, which is then saved in a subscription list that the user has saved in its entity. From these lists, rabbit listener finds correct receivers and sends the requested message to them. 
 
-\subsection{Front end}\label{sub:frontend}
-User interacts with the program via web browser and gets information from database by communicating with business logic via Spring MVC, using Thymeleaf \cite{thymleaf}. Thymeleaf is an integrated method to use in HTML code in order to access data from models, generated based on the request sent by user. HTML code was used to create different use case screens and according to what requests can be made, the appropriate thymeleaf code was inserted into HTML code. For the pages to look "better" and be user friendly with what can be done on a web page, CSS was used to decorate the pages and how they look/show up for the client.
+\subsection{Front End}\label{sub:frontend}
+User interacts with the program via web browser and gets information from database by communicating with business logic via Spring MVC, using Thymeleaf. Thymeleaf is an integrated method to use in HTML code in order to access data from models, generated based on the request sent by user. HTML code was used to create different use case screens and according to what requests can be made, the appropriate thymeleaf code was inserted into HTML code. For the pages to look "better" and be user friendly with what can be done on a web page, CSS was used to decorate the pages and how they look/show up for the client.
