@@ -1,5 +1,5 @@
 * **Report structure**
-  * **Introduction [~1 page]**
+  * **Introduction [~1 page]** :heavy_check_mark:
     * A brief introduction to the prototype implementation and topic of the project
     * Discuss (briefly) the technology stack that has been selected, mention related technologies (if relevant), primary arguments for choice of technology stack
     * A brief account of the results that have been obtained in the project
@@ -14,7 +14,7 @@
     * May involve selected models from Chaps. 5 of the IoT and cloud books
   * **Implementation [~4 pages]** :heavy_check_mark:
     * Details of how the prototype has been implemented which may involve presentation of suitable code snippets
-  * **Test-bed environment and experiments [~2 pages]**
+  * **Test-bed environment and experiments [~2 pages]** :heavy_check_mark:
     * Explain how the prototype has been tested the test-bed environmen
     * Explains what experiments have been done and the results.
   * **Conclusion [~1/2 page]**
