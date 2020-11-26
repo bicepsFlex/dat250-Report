@@ -1,7 +1,7 @@
 \section{Demonstrator Prototype}
 \label{sec:design}
 
-In this project, several software technologies were used that have already been mentioned and described in section above. For all technologies to communicate with each other, a REST API is used. User can view the application by sending HTTP request to server from web browser and server replying with a handled response. A user has different "interaction" he/she can do with the web application, those are described in \ref{sub:usecase}.
+In this project, several software technologies were used that have already been mentioned and described in section above. For all technologies to communicate with each other, a REST API is used. User can view the application by sending HTTP request to server from web browser and server replying with a handled response. A user has different "interaction" he/she can do with the web application, those are described in section~\ref{sub:usecase}.
 
 \subsection{Architecture}
 \label{sub:architeure}
@@ -13,26 +13,26 @@ There is also support for IoT devices to communicate with the server, and it sen
 There is also a messaging system that gets poll information from REST API and sends them to a NoSQL database. Where the polls can be used in other use cases, than the web application intends to.
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{figs/archdiagram.png}
+  \includegraphics[scale=0.45]{figs/archdiagram.png}
   \caption[scale=0.5]{Architecture diagram.}
   \label{fig:archdiagram}
 \end{figure}
 
 \subsection{Application flow}
 \label{sub:appflow}
-Application flow can be seen in Figure~\ref{fig:applicationflow}, which has the thought out interactions on the different web pages and what will be possible for the user to do. A users will be able to vote on a public poll without the need to log in, or have an account at all, or if the poll is private, then the user will be able to create an account to vote, and also create his/her own polls. There will also be a possibility to look-up polls by their names.
+Application flow can be seen in figure~\ref{fig:applicationflow}, which has the thought out interactions on the different web pages and what will be possible for the user to do. A users will be able to vote on a public poll without the need to log in, or have an account at all, or if the poll is private, then the user will be able to create an account to vote, and also create his/her own polls. There will also be a possibility to look-up polls by their names.
 
 All actions will have a success and possibly a failure, these will be handled with proper requests and responses for the different actions.
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{figs/applicationflow.png}
+  \includegraphics[scale=0.45]{figs/applicationflow.png}
   \caption[scale=0.5]{Application flow.}
   \label{fig:applicationflow}
 \end{figure}
 
 \subsection{Use case}
 \label{sub:usecase}
-In Figure~\ref{fig:usecases}, user enters the Application via web browser and is able to login or register new account. On main page after logging in; user can create a new poll, delete or edit an already existing poll (if user is owner), search / look-up a poll and vote on it. Since the application also supports IoT devices, the use case of an IoT device is to enter a poll with pollID and vote on it.
+In figure~\ref{fig:usecases}, user enters the Application via web browser and is able to login or register new account. On main page after logging in; user can create a new poll, delete or edit an already existing poll (if user is owner), search / look-up a poll and vote on it. Since the application also supports IoT devices, the use case of an IoT device is to enter a poll with pollID and vote on it.
 
 \begin{itemize}
   \item \textbf{Vote on a Poll:} Everyone can vote on a public poll, using a web form, but to vote on a private poll the user must be logged in.
@@ -48,17 +48,17 @@ In Figure~\ref{fig:usecases}, user enters the Application via web browser and is
 \end{itemize}
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{figs/usecases.png}
+  \includegraphics[scale=0.45]{figs/usecases.png}
   \caption[scale=0.5]{Use cases.}
   \label{fig:usecases}
 \end{figure}
 
 \subsection{Domain model}
 \label{sub:domainmodel}
-The domain model in Figure~\ref{fig:domainmodel} describes the planned persisted entities. A user with a uID primary key which can have multiple Polls, with a PollID as primary key and user foreign key. The database will also save which user has voted on which poll, so that a logged in user cannot vote multiple times on the same poll. This data is persisted into "User has Voted" table.
+The domain model in figure~\ref{fig:domainmodel} describes the planned persisted entities. A user with a uID primary key which can have multiple Polls, with a PollID as primary key and user foreign key. The database will also save which user has voted on which poll, so that a logged in user cannot vote multiple times on the same poll. This data is persisted into "User has Voted" table.
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{figs/domainmodel.png}
+  \includegraphics[scale=0.45]{figs/domainmodel.png}
   \caption[scale=0.5]{Domain model.}
   \label{fig:domainmodel}
 \end{figure}
@@ -66,21 +66,3 @@ The domain model in Figure~\ref{fig:domainmodel} describes the planned persisted
 The user also has Lists of Polls he/she subscribed to, to receive updates, and subscribe messages list, with messages of the subscriptions.
 
 \par\noindent In the next section we will see how the prototype was implemented, and the different technologies used.
-
-
-% About 4 pages on:
-
-% \begin{enumerate}
-
-% \item An architectural overview of the application that has been implemented
-% \item High-level design, domain model, … (App assignment A)
-% \item May involve selected models from Chaps. 5 of the IoT and cloud books
-
-% \end{enumerate}
-
-% The example below shows how you may include code. There are similar
-% styles for many other languages - in case you do not use Java in your
-% project. You can wrap the listing into a figure in case you need to
-% refer to it. How to create a figure was shown in Section~\ref{sec:technology}.
-
-% \lstinputlisting[language=java]{code/BoksVolum.java}

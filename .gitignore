@@ -5,3 +5,10 @@
 *.aux
 *~
 desktop.ini
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+*.toc
+*.out

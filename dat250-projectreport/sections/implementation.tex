@@ -6,7 +6,7 @@ In this section we'll describe how the different software technologies were impl
 \subsection{JPA}\label{sub:jpa}
 Prototype implementation had few major steps. First and most crucial one, was to create JPA entities and let them communicate with each other, from given relations between them.
 
-Two entities were created, \textbf{POLL} and \textbf{USER} with appropriate relations stored in Derby H2 relational database. Relations between those entities are One-To-Many, since one user can create many polls, but only one user can be the creator/owner of a specific poll. Furthermore, there is a possibility to vote on a specific poll, thus there is a need for storing data about that too. This is handled with a "Many-To-Many" relation between Poll and User entities, creating a new table with two attributes \textbf{User.uID} and \textbf{Poll.pollID} storing "who voted on what".
+Two entities were created, \textbf{POLL} and \textbf{USER} with appropriate relations stored in a H2 relational database. Relations between those entities are One-To-Many, since one user can create many polls, but only one user can be the creator/owner of a specific poll. Furthermore, there is a possibility to vote on a specific poll, thus there is a need for storing data about that too. This is handled with a "Many-To-Many" relation between Poll and User entities, creating a new table with two attributes \textbf{User.uID} and \textbf{Poll.pollID} storing "who voted on what".
 
 As shown in the example below, JPA makes it very easy to create new entities. Just by adding annotation \textit{@Entity}, the Java class is then declared to behave as an entity when program runs. In the same way we can use \textit{@Id, @ManyToOne, @ManyToMany, ...} annotations to configure the desired relations and identities for different entity attributes.
 
@@ -29,6 +29,11 @@ In a controller class we can use different request mappings, such as \textit{@Ge
 
 While implementing REST API to our prototype; post, get, put, delete mapping was used to make user interact with prototype's business logic. Since this requires the user to send HTTP-request with different mappings for different operations. Later, this was modified and downgraded to only GET and POST mappings, since those are the only two HTTP requests a HTML form supports.
 
+\subsubsection{IoT support}\label{subsub:IoTsupport}
+Final project has support for a voting IoT device and display IoT device to connect to a poll with HTTP request. To make this a possibility, more CRUD operation mappings were added to the program. When correct GET and POST mappings were implemented for an IoT device to be able to connect to a poll, a virtual device was created in Java.
+
+A small and easy Java program was created with simple HTTP requests for the IoT to connect to the prototype. In order to create the program, just one Java class was needed and few helping methods to check for any potential errors when "user" input is used to navigate in the program and vote on a poll or look-up its results.
+
 \subsection{Security}\label{sub:security}
 Since a user must register and login to use most parts of the web page, there needed to be some security implemented. For this we used Spring frameworks Security dependency, which allowed us to simply define which pages could, and which couldn't be accessed without logging in, this can be seen in the code snippet below.
 
@@ -38,13 +43,21 @@ For a “simpler” and more secure login process, we decided to use Google's OA
 
 {\footnotesize\textbf{Disclaimer!}\textit{ All documentations and tutorials we looked at about Spring Framework were taken from \cite{spring_Framework}}}
 
-\subsection{Firebase}\label{sub:firebase}
-\textbf{\textit{TODO}}
+\subsection{Firebase}\label{sub:firebaseimplement}
+The project required storing of results in a noSQL database. For this task we chose to use Firebase Cloud Firestore. The way this was implemented was by creating a service component by adding the @Service annotation from Spring Boot. This class handles initializing of the Firebase database, so Spring @Postconstruct is also added to make sure the method is initialized properly before the class is put into service.
 
+\noindent For populating of the database with results from the poll we use the @PostMapping and @PutMapping from the controller. When a poll is created, it momentarily gets stored in the database. Same goes for the updates, when for example someone is voting on a poll, it gets updated in the database as the vote is cast. In listing~\ref{code:firebase} you can see a code snippet for how the poll gets stored in the database, with collection name Polls. It then stores the poll created with document name set as the Polls ID.
+\lstinputlisting[label={code:firebase},caption={Adding poll to Firebase}, language={java}]{code/firebase.java}
 \subsection{Messaging System}\label{sub:messaging}
+\subsubsection{RabbitMQ}
 In the web application, a user can subscribe to a poll and receive its results when the poll closes. This calls for a messaging system implantation. For this we used RabbitMQ with a receiver and a sender class, again using Java annotations to declare a method to be a RabbitListener. We chose to use a topic-based messaging queue, as it made it easy to use poll status (present, past, future) as the topic keys.
 
-But before a user can receive messages from a subscription, the user must subscribe to a specific poll, which is then saved in a subscription list that the user has saved in its entity. From these lists, rabbit listener finds correct receivers and sends the requested message to them. 
+But before a user can receive messages from a subscription, the user must subscribe to a specific poll, which is then saved in a subscription list that the user has saved in its entity. From these lists, rabbit listener finds correct receivers and sends the requested message to them.
+\subsubsection{Dweet.io}
+As for the implementation of dweet.io, it was desired that the events of starting and closing a poll should be “dweeted”. This simply means that whenever a poll is created, information about the poll name and description is published to dweet.io. A poll that is closed will additionally send information about the result of the poll. When implementing code that will send out a dweet, it is important that a unique name/ID is chosen. If a machine or user wants to get information about this dweet, it will use this unique name to get it.
+
+The code snippet in listing~\ref{code:dweet} illustrates how the application would extract the poll name and description and post it to dweet.io, in the events of creating a new poll. After setting a unique name, it takes the name and description values and puts them into a JSON element. It is lastly published to dweet.io by using the publish function provided by the dweet.io library for Java, with the unique name and JSON element inputted as parameters. If one wished to get this dweet, one could simply type a request URL with the unique name in a browser. In this case, it would be: https://dweet.io:443/get/latest/dweet/for/unique\_poll\_dweet.
+\lstinputlisting[label={code:dweet},caption={Sending a dweet of a newly created poll with name and description}, language={java}]{code/dweet.java}
 
 \subsection{Front End}\label{sub:frontend}
 User interacts with the program via web browser and gets information from database by communicating with business logic via Spring MVC, using Thymeleaf. Thymeleaf is an integrated method to use in HTML code in order to access data from models, generated based on the request sent by user. HTML code was used to create different use case screens and according to what requests can be made, the appropriate thymeleaf code was inserted into HTML code. For the pages to look "better" and be user friendly with what can be done on a web page, CSS was used to decorate the pages and how they look/show up for the client.

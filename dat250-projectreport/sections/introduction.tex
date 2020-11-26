@@ -1,20 +1,30 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Approximately 1 page on:
-
 \subsection{Implementation}
-\label{sub:implementation} A brief introduction to the prototype implementation and topic of the project.
+\label{sub:implementation} While there was a fair amount of freedom associated with creating this prototype application, there was also introduced some requirements that the project had to abide by. In order to meet these requirements, a lot of different methods and technologies were utilized.  This includes implementing both relational and non-relational databases, messaging systems, REST API’s, security aspects and more. This report will go into detail which technologies and methods were used, why they were used and how they were implemented in correlation with each other.
 
 \subsection{Technology stack}
-\label{sub:techstack} Discuss (briefly) the technology stack that has been selected, mention related technologies (if relevant), primary arguments for choice of technology stack.
-
+\label{sub:techstack}
+The technology stack chosen for the project contains of:
+\begin{description}[noitemsep]
+    \item[Firebase]
+    \item[RabbitMQ]
+    \item[Spring framework]
+    \item[Dweet.io]
+    \item[H2 Database]
+\end{description}
+The main reasons behind this selection of technologies are that they all run great together, they perform well in the Spring framework. Finding material on these technologies are also a plus, as there are many great examples on how to implement each of them. Spring offers a lot to the application. Since it supports both non-relational and relational databases it is a great choice for developers who need to connect their applications to more than one database. 
 \subsection{Results}
-\label{sub:results} A brief account of the results that have been obtained in the project.
+\label{sub:results}The results of this project is an application that allows for users to interact with polls in a number of ways. Either it is creating a poll, deleting one, editing one or voting on one. All of this is done through different CRUD operations that interact with values stored in databases. Voting can also be done by external IoT devices. 
 
 \subsection{Organization of report}
-\label{sub:organization}A one paragraph overview at the end, explaining how the rest of the report is / has been organised.
+\label{sub:organization}
 
-\noindent
-This rest of this report is organised as follows:
-Section~\ref{sec:technology} gives an ....
+The rest of this report is organized as follows:
+\begin{description}[noitemsep]
+    \item[Section~\ref{sec:technology}] gives an overview of the key concepts and architecture of the chosen software technologies used in the project. New technologies that are not already introduced in the DAT250 course will have some running examples.
+    \item[Section~\ref{sec:design}] gives an architectural overview of the application, with different belonging models such as an architecture diagram, domain model and models for use cases and application flow.
+    \item[Section~\ref{sec:implementation}] describes in greater detail how the different software technologies are implemented, their part in the project and running examples with code snippets for visualization and better understanding of how the code works.
+    \item[Section~\ref{sec:evaluation}] explains the progress of the project, how the application has been tested, trial and errors and the results.
+\end{description}
