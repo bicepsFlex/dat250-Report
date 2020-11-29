@@ -1,4 +1,4 @@
-* **Report structure**
+* **Report structure** :heavy_check_mark:
   * **Introduction [~1 page]** :heavy_check_mark:
     * A brief introduction to the prototype implementation and topic of the project
     * Discuss (briefly) the technology stack that has been selected, mention related technologies (if relevant), primary arguments for choice of technology stack
@@ -17,7 +17,7 @@
   * **Test-bed environment and experiments [~2 pages]** :heavy_check_mark:
     * Explain how the prototype has been tested the test-bed environmen
     * Explains what experiments have been done and the results.
-  * **Conclusion [~1/2 page]**
+  * **Conclusion [~1/2 page]** :heavy_check_mark:
     * Concludes on the project, including the technology, its maturity, learning curve, and quality of the documentation
-  * **References [~1/2 page]**
+  * **References [~1/2 page]** :heavy_check_mark:
     * Provide a well chosen set of references, suitable for someone interesting in learning about the software technology used in the project

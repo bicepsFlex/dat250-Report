@@ -11,3 +11,4 @@ public class Poll {
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> usersVoted = new ArrayList<>();
+}

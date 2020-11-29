@@ -10,29 +10,29 @@ A Client (user) uses the web browser to send requests and get responses from the
 
 There is also support for IoT devices to communicate with the server, and it sends the requests straight to the REST API which doesn't have to go through the extra steps with authentication and Model view in web browser.
 
-There is also a messaging system that gets poll information from REST API and sends them to a NoSQL database. Where the polls can be used in other use cases, than the web application intends to.
+This project additionally includes a messaging system that gets poll information from REST API and sends them to a NoSQL database. Where the polls can be used in other use cases, than the web application intends to.
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.45]{figs/archdiagram.png}
+  \includegraphics[scale=0.5]{figs/archdiagram.png}
   \caption[scale=0.5]{Architecture diagram.}
   \label{fig:archdiagram}
 \end{figure}
 
 \subsection{Application flow}
 \label{sub:appflow}
-Application flow can be seen in figure~\ref{fig:applicationflow}, which has the thought out interactions on the different web pages and what will be possible for the user to do. A users will be able to vote on a public poll without the need to log in, or have an account at all, or if the poll is private, then the user will be able to create an account to vote, and also create his/her own polls. There will also be a possibility to look-up polls by their names.
+Application flow can be seen in figure~\ref{fig:applicationflow}, which has the thought out interactions on the different web pages and what will be possible for the user to do. A users will be able to vote on a public poll without the need of being authenticated, or be in possession of an account at all. If the poll is private, then the user will be able to create an account to vote. After creating an account, user will have the opportunity to create/edit his/her own polls. User needs a PollID to vote, and to find the different PollIDs, an option to search for available polls by their respective names will be created. 
 
-All actions will have a success and possibly a failure, these will be handled with proper requests and responses for the different actions.
+Some actions can end in a failure, these will be handled with proper responses giving the user "detailed" information on what to correct, for the different actions.
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.45]{figs/applicationflow.png}
+  \includegraphics[scale=0.5]{figs/applicationflow.png}
   \caption[scale=0.5]{Application flow.}
   \label{fig:applicationflow}
 \end{figure}
 
 \subsection{Use case}
 \label{sub:usecase}
-In figure~\ref{fig:usecases}, user enters the Application via web browser and is able to login or register new account. On main page after logging in; user can create a new poll, delete or edit an already existing poll (if user is owner), search / look-up a poll and vote on it. Since the application also supports IoT devices, the use case of an IoT device is to enter a poll with pollID and vote on it.
+In figure~\ref{fig:usecases}, user enters the Application via web browser and is able to login or register new account. On main page after logging in; user can create a new poll, delete or edit an already existing poll (if user is owner), search/look-up a poll and vote on it. Since the application also supports IoT devices, the use case of an IoT device is to enter a poll with PollID and vote on it.
 
 \begin{itemize}
   \item \textbf{Vote on a Poll:} Everyone can vote on a public poll, using a web form, but to vote on a private poll the user must be logged in.
@@ -48,21 +48,21 @@ In figure~\ref{fig:usecases}, user enters the Application via web browser and is
 \end{itemize}
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.45]{figs/usecases.png}
+  \includegraphics[scale=0.5]{figs/usecases.png}
   \caption[scale=0.5]{Use cases.}
   \label{fig:usecases}
 \end{figure}
 
 \subsection{Domain model}
 \label{sub:domainmodel}
-The domain model in figure~\ref{fig:domainmodel} describes the planned persisted entities. A user with a uID primary key which can have multiple Polls, with a PollID as primary key and user foreign key. The database will also save which user has voted on which poll, so that a logged in user cannot vote multiple times on the same poll. This data is persisted into "User has Voted" table.
+The domain model in figure~\ref{fig:domainmodel} describes the planned persisted entities. A User with a uID as primary key can have multiple Polls, with a PollID as primary key and User as a foreign key. The database will also save which user has voted on which poll, so that a logged in user cannot vote multiple times on the same poll. This data is persisted into "User has Voted" table.
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.45]{figs/domainmodel.png}
+  \includegraphics[scale=0.5]{figs/domainmodel.png}
   \caption[scale=0.5]{Domain model.}
   \label{fig:domainmodel}
 \end{figure}
 
-The user also has Lists of Polls he/she subscribed to, to receive updates, and subscribe messages list, with messages of the subscriptions.
+The user also has lists of Polls he/she subscribed to, to receive updates, and subscription message list, with messages from the subscriptions.
 
-\par\noindent In the next section we will see how the prototype was implemented, and the different technologies used.
+\par\noindent In the next section implementation of the project will be covered, and the different technologies used.
