@@ -1,7 +1,7 @@
 \section{Demonstrator Prototype}
 \label{sec:design}
 
-In this project, several software technologies were used that have already been mentioned and described in section above. For all technologies to communicate with each other, a REST API is used. User can view the application by sending HTTP request to server from web browser and server replying with a handled response. A user has different "interaction" he/she can do with the web application, those are described in section~\ref{sub:usecase}.
+In this project, several software technologies were used that have already been mentioned and described in section above. For all technologies to communicate with each other, a REST API is used. User can view the application by sending HTTP request to server from web browser and server replying with a handled response. A user has different "interaction" he/she can do with the web application, those are described in Section~\ref{sub:usecase}.
 
 \subsection{Architecture}
 \label{sub:architeure}
@@ -20,7 +20,7 @@ This project additionally includes a messaging system that gets poll information
 
 \subsection{Application flow}
 \label{sub:appflow}
-Application flow can be seen in figure~\ref{fig:applicationflow}, which has the thought out interactions on the different web pages and what will be possible for the user to do. A users will be able to vote on a public poll without the need of being authenticated, or be in possession of an account at all. If the poll is private, then the user will be able to create an account to vote. After creating an account, user will have the opportunity to create/edit his/her own polls. User needs a PollID to vote, and to find the different PollIDs, an option to search for available polls by their respective names will be created. 
+Application flow can be seen in Figure~\ref{fig:applicationflow}, which has the thought out interactions on the different web pages and what will be possible for the user to do. A users will be able to vote on a public poll without the need of being authenticated, or be in possession of an account at all. If the poll is private, then the user will be able to create an account to vote. After creating an account, user will have the opportunity to create/edit his/her own polls. User needs a PollID to vote, and to find the different PollIDs, an option to search for available polls by their respective names will be created. 
 
 Some actions can end in a failure, these will be handled with proper responses giving the user "detailed" information on what to correct, for the different actions.
 \begin{figure}[H]
@@ -32,7 +32,7 @@ Some actions can end in a failure, these will be handled with proper responses g
 
 \subsection{Use case}
 \label{sub:usecase}
-In figure~\ref{fig:usecases}, user enters the Application via web browser and is able to login or register new account. On main page after logging in; user can create a new poll, delete or edit an already existing poll (if user is owner), search/look-up a poll and vote on it. Since the application also supports IoT devices, the use case of an IoT device is to enter a poll with PollID and vote on it.
+In Figure~\ref{fig:usecases}, user enters the Application via web browser and is able to login or register new account. On main page after logging in; user can create a new poll, delete or edit an already existing poll (if user is owner), search/look-up a poll and vote on it. Since the application also supports IoT devices, the use case of an IoT device is to enter a poll with PollID and vote on it.
 
 \begin{itemize}
   \item \textbf{Vote on a Poll:} Everyone can vote on a public poll, using a web form, but to vote on a private poll the user must be logged in.
@@ -55,7 +55,7 @@ In figure~\ref{fig:usecases}, user enters the Application via web browser and is
 
 \subsection{Domain model}
 \label{sub:domainmodel}
-The domain model in figure~\ref{fig:domainmodel} describes the planned persisted entities. A User with a uID as primary key can have multiple Polls, with a PollID as primary key and User as a foreign key. The database will also save which user has voted on which poll, so that a logged in user cannot vote multiple times on the same poll. This data is persisted into "User has Voted" table.
+The domain model in Figure~\ref{fig:domainmodel} describes the planned persisted entities. A User with a uID as primary key can have multiple Polls, with a PollID as primary key and User as a foreign key. The database will also save which user has voted on which poll, so that a logged in user cannot vote multiple times on the same poll. This data is persisted into "User has Voted" table.
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{figs/domainmodel.png}
